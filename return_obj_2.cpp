@@ -9,6 +9,16 @@ class samp
 
 public:
     samp() { s = NULL; }
+    samp(char *str)
+    {
+        s = (char *)malloc(strlen(str) + 1);
+        if (!s)
+        {
+            cout << " Allocation error \n";
+            exit(1);
+        }
+        strcpy(s, str);
+    }
     ~samp()
     {
         if (s)
@@ -17,19 +27,17 @@ public:
     }
 
     void show() { cout << s << "\n"; }
-    void set(char *str);
+    void set(char* str);
 };
-// Load a string .
-void samp ::set(char *str)
+
+void samp::set(char* str)
 {
+    if (s)
+        free(s);
     s = (char *)malloc(strlen(str) + 1);
-    if (!s)
-    {
-        cout << " Allocation error \n";
-        exit(1);
-    }
     strcpy(s, str);
 }
+
 // Return an object of type samp
 samp input()
 {
