@@ -15,6 +15,12 @@ class Student
         strcpy(name, n);
         marks = m;
     }
+    Student(const Student &s) // Copy constructor for deep copy
+    {
+        name = new char[strlen(s.name) + 1];
+        strcpy(name, s.name);
+        marks = s.marks;
+    }
     ~Student()
     {
         delete[] name;
@@ -31,7 +37,7 @@ int main()
     s1.display();
 
     // Copying object s1 to s2
-    Student s2 = s1; // This will cause a shallow copy issue
+    Student s2(s1); // Calls copy constructor
 
     s2.display();
 
